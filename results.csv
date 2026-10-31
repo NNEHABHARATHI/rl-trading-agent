@@ -1,0 +1,4 @@
+,Total Return %,Sharpe,Max Drawdown %,Win Rate %
+PPO Agent,18.95,0.41,-19.31,33.87
+Buy & Hold,50.81,0.75,-24.5,53.74
+SMA Crossover,3.81,0.14,-29.6,36.32
