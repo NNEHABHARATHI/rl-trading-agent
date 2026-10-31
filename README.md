@@ -28,9 +28,9 @@ Test whether an RL agent can learn a trading policy that beats simple baselines 
 
 | Strategy | Total Return % | Sharpe | Max Drawdown % | Win Rate % |
 |---|---|---|---|---|
-| PPO Agent | XX.XX | X.XX | -XX.XX | XX.XX |
-| Buy & Hold | XX.XX | X.XX | -XX.XX | XX.XX |
-| SMA Crossover | XX.XX | X.XX | -XX.XX | XX.XX |
+| PPO Agent | 18.95 | 0.41 | -19.31 | 33.87 |
+| Buy & Hold | 50.81 | 0.75 | -24.50 | 53.74 |
+| SMA Crossover | 3.81 | 0.14 | -29.60 | 36.32 |
 
 ### Equity curve
 
@@ -39,6 +39,10 @@ Test whether an RL agent can learn a trading policy that beats simple baselines 
 ![Equity curve](equity_curve.png)
 
 
+
+### Analysis
+
+The PPO agent did not beat Buy-and-Hold on total return or Sharpe over the test period. This is expected in a strongly trending market, since a long-only strategy that exits positions pays transaction costs and misses upside. It did, however, reduce maximum drawdown (-19.3% vs -24.5%) and clearly outperformed the SMA crossover baseline (18.95% vs 3.81% return, Sharpe 0.41 vs 0.14), showing it learned a useful risk-managing policy. Results are from a single seed and a single split, so they should be read as indicative, not conclusive.
 
 ## Run it
 
@@ -56,7 +60,7 @@ To change the asset, edit TICKER in rl_trading_agent.py (e.g. "^NSEI" for NIFTY 
 ## Limitations
 
 - Daily data and a simple long/flat strategy; no shorting or position sizing.
-- Single asset, single train/test split. Results can vary across random seeds.
+- Single asset, single train/test split, single seed. Results can vary across seeds.
 - Costs are modeled as a flat percentage; no slippage or market impact.
 - Past performance does not imply future results. This is an educational project, not financial advice.
 
@@ -69,4 +73,4 @@ To change the asset, edit TICKER in rl_trading_agent.py (e.g. "^NSEI" for NIFTY 
 
 ## Tech stack
 
-Python, pandas, NumPy, Gymnasium, Stable-Baselines3, PyTorch, matplotlib, yfinance
+Python,
