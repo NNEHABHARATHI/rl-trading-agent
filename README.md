@@ -8,21 +8,21 @@ Test whether an RL agent can learn a trading policy that beats simple baselines 
 
 ## Approach
 
-**Data**: Daily OHLCV for SPY (2012-2024) via `yfinance`.
+*Data*: Daily OHLCV for SPY (2012-2024) via yfinance.
 
-**Features**: Daily returns, RSI(14), MACD (normalized), 20-day rolling volatility, volume change. Normalized using training-set statistics only.
+*Features*: Daily returns, RSI(14), MACD (normalized), 20-day rolling volatility, volume change. Normalized using training-set statistics only.
 
-**Environment** (custom Gymnasium env):
-- **State**: last 30 days of features + current position
-- **Actions**: Hold / Buy (go long) / Sell (go flat)
-- **Reward**: position x next-day return - transaction cost
-- **Transaction cost**: 0.1% per position change
+*Environment* (custom Gymnasium env):
+- *State*: last 30 days of features + current position
+- *Actions*: Hold / Buy (go long) / Sell (go flat)
+- *Reward*: position x next-day return - transaction cost
+- *Transaction cost*: 0.1% per position change
 
-**Algorithm**: PPO (Stable-Baselines3, MLP policy), 200k timesteps.
+*Algorithm*: PPO (Stable-Baselines3, MLP policy), 200k timesteps.
 
-**Evaluation**: Chronological split, first 70% for training and last 30% for testing (no random shuffling, no leakage).
+*Evaluation*: Chronological split, first 70% for training and last 30% for testing (no random shuffling, no leakage).
 
-**Baselines**: Buy-and-Hold, SMA(20/50) crossover (with the same transaction costs).
+*Baselines*: Buy-and-Hold, SMA(20/50) crossover (with the same transaction costs).
 
 ## Results (out-of-sample)
 
@@ -32,24 +32,26 @@ Test whether an RL agent can learn a trading policy that beats simple baselines 
 | Buy & Hold | XX.XX | X.XX | -XX.XX | XX.XX |
 | SMA Crossover | XX.XX | X.XX | -XX.XX | XX.XX |
 
-*(Replace with the numbers from `results.csv` after running.)*
-
 ### Equity curve
+
+
 
 ![Equity curve](equity_curve.png)
 
+
+
 ## Run it
 
-```bash
-git clone https://github.com/<your-username>/rl-trading-agent.git
+bash
+git clone https://github.com/NNEHABHARATHI/rl-trading-agent.git
 cd rl-trading-agent
 pip install -r requirements.txt
 python rl_trading_agent.py
-```
 
-Outputs: `results.csv` and `equity_curve.png`.
 
-To change the asset, edit `TICKER` in `rl_trading_agent.py` (e.g. `"^NSEI"` for NIFTY 50).
+Outputs: results.csv and equity_curve.png.
+
+To change the asset, edit TICKER in rl_trading_agent.py (e.g. "^NSEI" for NIFTY 50).
 
 ## Limitations
 
